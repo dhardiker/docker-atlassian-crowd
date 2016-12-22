@@ -2,6 +2,12 @@
 
 SERVER_XML="${ATL_HOME}/apache-tomcat/conf/server.xml"
 
+# Remove other webapps if environment variables are set.
+if [ $TC_ONLY_CROWD_WEBAPP = "true" ]; then
+  echo "Removing non-crowd web applications from the distribution"
+  find "${ATL_HOME}/apache-tomcat/conf/Catalina/localhost/" -type f | grep -v "crowd.xml" | xargs rm
+fi
+
 # Remove any previous proxy configuration.
 sed -E 's/ proxyName="[^"]*"//g' -i "${SERVER_XML}"
 sed -E 's/ proxyPort="[^"]*"//g' -i "${SERVER_XML}"
