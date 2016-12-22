@@ -16,6 +16,7 @@ RUN set -x \
   && echo -e "\ncrowd.home=${ATL_DATA}" >> "${ATL_HOME}/${APP_PROPS}"
 
 ADD crowd-service.sh /opt/crowd-service.sh
+ADD ping.json "${ATL_HOME}/apache-tomcat/webapps/ROOT/ping.json"
 
 EXPOSE 8095
 CMD ["/opt/crowd-service.sh"]
