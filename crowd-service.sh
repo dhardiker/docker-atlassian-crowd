@@ -14,10 +14,12 @@ sed -E 's/ proxyPort="[^"]*"//g' -i "${SERVER_XML}"
 
 # Add new proxy configuration if environment variables are set.
 if [ ! -z "${TC_PROXYNAME}" ]; then
+  echo "Adding proxy name to connector"
   sed -E "s|<Connector|<Connector proxyName=\"${TC_PROXYNAME}\"|g" \
       -i "${SERVER_XML}"
 fi
 if [ ! -z "${TC_PROXYPORT}" ]; then
+  echo "Adding proxy port to connector"
   sed -E "s|<Connector|<Connector proxyPort=\"${TC_PROXYPORT}\"|g" \
       -i "${SERVER_XML}"
 fi
